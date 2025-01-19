@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const SearchBar = ({ keyword, setKeyword }) => {
   const [searchParams, setSearchParams] = useSearchParams();
