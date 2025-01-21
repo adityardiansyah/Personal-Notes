@@ -6,7 +6,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { Sun, Moon } from "lucide-react";
 
 const Navigation = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const { language, toggleLanguage, translations } = useLanguage();
 
@@ -20,7 +20,6 @@ const Navigation = () => {
           >
             {translations.appName}
           </Link>
-
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
@@ -38,10 +37,21 @@ const Navigation = () => {
                 </Link>
                 <Link
                   to="/notes/new"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className=" text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {translations.newNote}
                 </Link>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className="flex items-center space-x-4">
+            {isAuthenticated ? (
+              <>
+                <span className="text-gray-600 dark:text-gray-300">
+                  Hi, {user ? user.name : "Guest"}
+                </span>
                 <button
                   onClick={logout}
                   className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400"
