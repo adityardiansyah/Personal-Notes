@@ -1,0 +1,33 @@
+{
+    "appName": "Notes App",
+    "home": "Home",
+    "archived": "Archived",
+    "newNote": "New Note",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "passwordMismatch": "Passwords do not match",
+    "loading": "Loading...",
+    "noNotes": "No notes found",
+    "noteNotFound": "Note not found",
+    "delete": "Delete",
+    "archive": "Archive",
+    "unarchive": "Unarchive",
+    "addNewNote": "Add New Note",
+    "title": "Title",
+    "enterTitle": "Enter title",
+    "content": "Content",
+    "enterContent": "Enter content",
+    "addNote": "Add Note",
+    "search": "Search",
+    "searchPlaceholder": "Search notes...",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "changeLanguage": "Change Language"
+  }
+  
+  

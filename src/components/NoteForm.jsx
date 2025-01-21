@@ -1,66 +1,101 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { addNote } from "../utils/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
-const NoteForm = ({ addNote }) => {
+const NoteForm = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { translations } = useLanguage();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && body) {
-      addNote({ title, body, archived: false });
+    if (!title.trim() || !body.trim()) return;
+
+    setLoading(true);
+    try {
+      await addNote({ title, body });
       navigate("/");
+    } catch (error) {
+      console.error("Failed to add note:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white rounded-lg shadow-md p-6 mt-8"
-    >
-      <h2 className="text-2xl font-bold mb-6">Tambah Catatan Baru</h2>
-      <div className="mb-4">
-        <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
-          Judul
-        </label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Judul catatan"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="body" className="block text-gray-700 font-bold mb-2">
-          Isi Catatan
-        </label>
-        <textarea
-          id="body"
-          placeholder="Isi catatan"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-40"
-        />
-      </div>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+    <div className="max-w-2xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-colors duration-200"
       >
-        Tambah Catatan
-      </button>
-    </form>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+          {translations.addNewNote}
+        </h2>
+
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            {translations.title}
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            disabled={loading}
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                     bg-white dark:bg-gray-700 text-gray-800 dark:text-white
+                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                     disabled:opacity-50 transition-colors duration-200"
+            placeholder={translations.enterTitle}
+          />
+        </div>
+
+        <div className="mb-6">
+          <label
+            htmlFor="body"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            {translations.content}
+          </label>
+          <textarea
+            id="body"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            required
+            disabled={loading}
+            rows="6"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                     bg-white dark:bg-gray-700 text-gray-800 dark:text-white
+                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                     disabled:opacity-50 transition-colors duration-200 resize-none"
+            placeholder={translations.enterContent}
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md
+                   disabled:opacity-50 transition-colors duration-200"
+        >
+          {loading ? translations.loading : translations.addNote}
+        </button>
+      </form>
+    </div>
   );
 };
 
 NoteForm.propTypes = {
-  note: PropTypes.object,
-  addNote: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  body: PropTypes.string,
 };
 
 export default NoteForm;
