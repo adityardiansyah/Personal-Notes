@@ -106,9 +106,4 @@ const NoteDetail = () => {
   );
 };
 
-NoteDetail.propTypes = {
-  title: PropTypes.string,
-  body: PropTypes.string,
-};
-
 export default NoteDetail;

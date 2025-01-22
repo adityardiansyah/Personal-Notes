@@ -73,9 +73,4 @@ const NoteList = ({ archived = false }) => {
   );
 };
 
-NoteList.propTypes = {
-  archived: PropTypes.bool,
-  notes: PropTypes.arrayOf(PropTypes.object),
-};
-
 export default NoteList;

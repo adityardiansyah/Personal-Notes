@@ -110,10 +110,4 @@ const RegisterPage = () => {
   );
 };
 
-RegisterPage.propTypes = {
-  name: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-};
-
 export default RegisterPage;

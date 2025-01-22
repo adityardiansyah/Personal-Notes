@@ -6,6 +6,7 @@ import {
   register as registerApi,
   getUserLogged,
 } from "../utils/api";
+import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
@@ -69,4 +70,8 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
