@@ -27,7 +27,8 @@
     "searchPlaceholder": "Search notes...",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
-    "changeLanguage": "Change Language"
+    "changeLanguage": "Change Language",
+    "noArchivedNotes": "No Note Archived"
   }
   
   
